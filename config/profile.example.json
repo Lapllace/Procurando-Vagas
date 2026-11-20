@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "candidate": {
+    "displayName": "",
+    "headline": "",
+    "location": "",
+    "contact": {
+      "email": "",
+      "phone": "",
+      "portfolioUrl": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    }
+  },
+  "careerTargets": {
+    "roles": [],
+    "areas": [],
+    "excludedAreas": [],
+    "seniority": [],
+    "employmentTypes": []
+  },
+  "education": [],
+  "experiences": [],
+  "projects": [],
+  "skills": [],
+  "languages": [],
+  "certifications": [],
+  "privacy": {
+    "allowAiProcessingOfPersonalData": false,
+    "requireReviewBeforeUsingImportedFacts": true
+  },
+  "notes": "Modelo vazio. Preencha somente dados verdadeiros. Mantenha profile.json fora do Git."
+}

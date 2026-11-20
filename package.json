@@ -1,0 +1,38 @@
+{
+  "name": "vagamatch",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agente pessoal para descoberta e preparação de candidaturas.",
+  "engines": { "node": ">=22.16.0 <23", "npm": ">=10" },
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev:api": "npm run db:generate && npm run build -w @vagamatch/database && npm run dev -w @vagamatch/api",
+    "dev:web": "npm run dev -w @vagamatch/web",
+    "db:generate": "npm run prisma:generate -w @vagamatch/database",
+    "db:validate": "npm run prisma:validate -w @vagamatch/database",
+    "db:migrate": "npm run prisma:migrate -w @vagamatch/database",
+    "db:migrate:deploy": "npm run prisma:migrate:deploy -w @vagamatch/database",
+    "build:database": "npm run build -w @vagamatch/database",
+    "build:api": "npm run db:generate && npm run build:database && npm run build -w @vagamatch/api",
+    "build:web": "npm run build -w @vagamatch/web",
+    "build": "npm run build:api && npm run build:web",
+    "lint": "eslint . --max-warnings=0",
+    "format:check": "prettier --check .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.1",
+    "@types/node": "22.19.3",
+    "@types/pg": "8.15.6",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.1",
+    "globals": "16.5.0",
+    "prettier": "3.6.2",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.4",
+    "vitest": "4.0.8"
+  }
+}

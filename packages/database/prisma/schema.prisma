@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model AuditEvent {
+  id        String   @id @default(cuid())
+  eventType String   @db.VarChar(100)
+  outcome   String   @db.VarChar(30)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
