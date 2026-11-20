@@ -10,22 +10,31 @@ Agente pessoal para descobrir oportunidades de tecnologia, avaliar compatibilida
 
 ## Stack
 
-- Node.js 22 e TypeScript 5.9
+- Node.js 22.23.5 (linha 22 LTS) e TypeScript 5.9
 - API: NestJS 12 + class-validator
 - Web: Next.js 16.4 + React 19
-- Banco: PostgreSQL 16 + Prisma ORM 7.10
+- Banco: PostgreSQL 16 (porta local 55432) + Prisma ORM 7.10
 - Testes: Vitest
 - Qualidade: ESLint 10 + Prettier
 - Ambiente local: Docker Compose
 
 ## Configuração local (Windows / PowerShell)
 
-1. Copie o arquivo de ambiente: `Copy-Item .env.example .env`
-2. Suba o PostgreSQL: `docker compose up -d db`
-3. Instale dependências: `npm install`
-4. Gere o Prisma Client: `npm run db:generate`
-5. Aplique as migrations: `npm run db:migrate`
-6. Inicie a API e a web em terminais separados: `npm run dev:api` e `npm run dev:web`
+Pré-requisitos: Node.js 22.23.5, Docker Desktop instalado e iniciado com Linux containers.
+
+1. Confira as versões: `node -v` e `npm -v`.
+2. Copie o arquivo de ambiente: `Copy-Item .env.example .env`.
+3. Confira que Docker Desktop está em execução: `docker version` deve mostrar Client e Server.
+4. Suba o PostgreSQL dedicado do VagaMatch: `docker compose up -d db`.
+5. Confirme o estado: `docker compose ps` (o banco deve ficar healthy).
+6. Instale dependências: `npm install`.
+7. Gere o Prisma Client: `npm run db:generate`.
+8. Aplique as migrations: `npm run db:migrate`.
+9. Inicie a API e a web em terminais separados: `npm run dev:api` e `npm run dev:web`.
+
+O PostgreSQL do contêiner escuta na porta 5432 internamente, mas é publicado somente em `127.0.0.1:55432` no Windows para evitar conflito com instalações PostgreSQL existentes. O `.env` local precisa apontar para a porta 55432.
+
+Se o Docker Desktop não estiver disponível, instale-o seguindo a documentação oficial e inicie o mecanismo Linux antes do comando de Compose.
 
 API: http://127.0.0.1:3001/api/health
 Perfil: http://127.0.0.1:3000/profile

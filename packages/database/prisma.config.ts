@@ -6,6 +6,6 @@ export default defineConfig({
   datasource: {
     url:
       process.env.DATABASE_URL ??
-      'postgresql://vagamatch:vagamatch_dev_only@127.0.0.1:5432/vagamatch?schema=public',
+      'postgresql://vagamatch:vagamatch_dev_only@127.0.0.1:55432/vagamatch?schema=public',
   },
 });
