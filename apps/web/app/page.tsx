@@ -53,21 +53,21 @@ export default function HomePage() {
             </span>
           ))}
         </div>
+        <a className="profile-cta" href="/profile">Configurar meu perfil <span>→</span></a>
       </section>
 
       <section className="status-panel" aria-labelledby="status-title">
         <div>
           <p className="eyebrow">PRIMEIRO ACESSO</p>
-          <h2 id="status-title">Sua central de oportunidades está sendo preparada.</h2>
+          <h2 id="status-title">Comece organizando seu histórico profissional.</h2>
           <p>
-            Nesta fundação, o painel ainda não coleta vagas nem armazena seu
-            currículo. O próximo passo é implementar o perfil mestre com revisão
-            de cada informação.
+            Cadastre formação, experiências, projetos, competências e disponibilidade.
+            A busca de vagas será conectada depois que o perfil estiver revisado.
           </p>
         </div>
         <div className="status-indicator">
           <span className="status-dot" />
-          Fundação inicial
+          Perfil mestre disponível
         </div>
       </section>
 

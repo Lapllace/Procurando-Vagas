@@ -5,17 +5,25 @@
 - Monorepositório npm com API, web e pacote de banco.
 - TypeScript, lint, formatação, testes e CI.
 - PostgreSQL local via Docker Compose.
-- Prisma ORM com migration inicial mínima.
+- Prisma ORM com migrations.
 - Health check da API e página inicial web.
 - .gitignore abrangente e política de logs sem dados pessoais.
 
-Aceite: dependências instalam; API/web compilam; migration valida e aplica; testes passam; dados pessoais permanecem fora do Git.
+Status: concluída e validada em CI, incluindo aplicação das migrations em PostgreSQL 16, lint, typecheck, testes e build.
 
 ## Fase 1 — Perfil mestre e preferências
 
-Cadastro de formação, experiências, projetos, habilidades e idiomas; importação PDF/DOCX como rascunho; revisão/confirmacão de fatos; preferências de vagas; grade editável por semestre; histórico e proveniência.
+- Cadastro de formação, experiências, projetos, habilidades, idiomas e certificações.
+- Importação PDF/DOCX planejada, sempre como rascunho.
+- Revisão e confirmação de fatos.
+- Preferências de cargo, senioridade, modalidade, localidade e carga horária.
+- Grade acadêmica editável por semestre e janelas reais de trabalho.
+- Histórico e proveniência das informações.
+- API GET/PATCH e tela local para editar perfil.
 
-Aceite: nenhum fato extraído é usado como confirmado sem revisão; grade e filtros podem ser editados.
+Status: API, persistência e primeira tela implementadas; testes e CI em validação.
+
+Aceite: nenhum fato extraído é utilizado como confirmado sem revisão; grade e filtros podem ser editados; conflitos e dados inválidos são rejeitados.
 
 ## Fase 2 — Descoberta de vagas
 
@@ -40,16 +48,3 @@ Aceite: cada documento exportado referencia vaga e fatos utilizados; candidato r
 Dashboard de candidaturas; status/histórico; alertas; e-mail somente leitura; integração n8n opcional por webhook autenticado; pausa global e tratamento de falhas.
 
 Aceite: rotinas podem ser pausadas; alertas trazem links da origem; nenhum envio é automático.
-
-## Cenários de teste essenciais
-
-1. Estágio remoto de 20 horas com horário flexível e tecnologias compatíveis.
-2. Vaga presencial cuja jornada fixa conflita com uma aula.
-3. Vaga híbrida sem frequência presencial informada.
-4. Vaga júnior com experiência exigida acima da experiência validada.
-5. Vaga em área explicitamente excluída pelo candidato.
-6. Vaga que exige diploma concluído enquanto formação está em andamento.
-7. Vaga que aceita estudante de área correlata.
-8. Duas fontes publicando a mesma vaga.
-9. Vaga expirada.
-10. Resposta da IA que inventa experiência ou certificação.

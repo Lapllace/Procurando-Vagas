@@ -8,6 +8,214 @@ datasource db {
   provider = "postgresql"
 }
 
+enum FactStatus {
+  CANDIDATE_PROVIDED
+  NEEDS_REVIEW
+  CONFIRMED
+}
+
+model CandidateProfile {
+  id           String   @id @default("local-candidate")
+  displayName  String?  @db.VarChar(160)
+  headline     String?  @db.VarChar(240)
+  email        String?  @db.VarChar(320)
+  phone        String?  @db.VarChar(60)
+  location     String?  @db.VarChar(180)
+  portfolioUrl String?  @db.VarChar(2048)
+  githubUrl    String?  @db.VarChar(2048)
+  linkedinUrl  String?  @db.VarChar(2048)
+  summary      String?  @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  education     EducationRecord[]
+  experiences   ExperienceRecord[]
+  projects      ProjectRecord[]
+  skills        SkillRecord[]
+  languages     LanguageRecord[]
+  certifications CertificationRecord[]
+  preferences   JobPreferences?
+  availability  AvailabilityTerm?
+}
+
+model EducationRecord {
+  id               String     @id @default(cuid())
+  profileId        String
+  institution      String     @db.VarChar(180)
+  course           String     @db.VarChar(180)
+  fieldOfStudy     String?    @db.VarChar(180)
+  status           String     @default("IN_PROGRESS") @db.VarChar(40)
+  startPeriod      String?    @db.VarChar(30)
+  expectedEndPeriod String?   @db.VarChar(30)
+  details          String?    @db.Text
+  factStatus       FactStatus @default(NEEDS_REVIEW)
+  sourceReference  String?    @db.VarChar(2048)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  profile CandidateProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+model ExperienceRecord {
+  id              String     @id @default(cuid())
+  profileId       String
+  title           String     @db.VarChar(180)
+  organization    String?    @db.VarChar(180)
+  employmentType  String?    @db.VarChar(60)
+  startPeriod     String?    @db.VarChar(30)
+  endPeriod       String?    @db.VarChar(30)
+  isCurrent       Boolean    @default(false)
+  description     String?    @db.Text
+  responsibilities String[]  @default([])
+  technologies    String[]   @default([])
+  factStatus      FactStatus @default(NEEDS_REVIEW)
+  sourceReference String?    @db.VarChar(2048)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  profile CandidateProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+model ProjectRecord {
+  id              String     @id @default(cuid())
+  profileId       String
+  name            String     @db.VarChar(180)
+  description     String?    @db.Text
+  role            String?    @db.VarChar(120)
+  url             String?    @db.VarChar(2048)
+  startPeriod     String?    @db.VarChar(30)
+  endPeriod       String?    @db.VarChar(30)
+  technologies    String[]   @default([])
+  factStatus      FactStatus @default(NEEDS_REVIEW)
+  sourceReference String?    @db.VarChar(2048)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  profile CandidateProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+model SkillRecord {
+  id              String     @id @default(cuid())
+  profileId       String
+  name            String     @db.VarChar(120)
+  category        String?    @db.VarChar(100)
+  level           String?    @db.VarChar(60)
+  lastUsedPeriod  String?    @db.VarChar(30)
+  evidence        String?    @db.Text
+  factStatus      FactStatus @default(NEEDS_REVIEW)
+  sourceReference String?    @db.VarChar(2048)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  profile CandidateProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+model LanguageRecord {
+  id              String     @id @default(cuid())
+  profileId       String
+  name            String     @db.VarChar(100)
+  proficiency     String?    @db.VarChar(80)
+  factStatus      FactStatus @default(NEEDS_REVIEW)
+  sourceReference String?    @db.VarChar(2048)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  profile CandidateProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+model CertificationRecord {
+  id              String     @id @default(cuid())
+  profileId       String
+  name            String     @db.VarChar(180)
+  issuer          String?    @db.VarChar(180)
+  issuedPeriod    String?    @db.VarChar(30)
+  url             String?    @db.VarChar(2048)
+  factStatus      FactStatus @default(NEEDS_REVIEW)
+  sourceReference String?    @db.VarChar(2048)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  profile CandidateProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+model JobPreferences {
+  id                 String   @id @default(cuid())
+  profileId          String   @unique
+  targetTitles       String[] @default([])
+  targetAreas        String[] @default([])
+  excludedAreas      String[] @default([])
+  seniority          String[] @default([])
+  employmentTypes    String[] @default([])
+  workModes          String[] @default([])
+  locations          String[] @default([])
+  weeklyHoursMin     Int?
+  weeklyHoursMax     Int?
+  commuteLimitMinutes Int?
+  updatedAt          DateTime @updatedAt
+
+  profile CandidateProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model AvailabilityTerm {
+  id                String   @id @default(cuid())
+  profileId         String   @unique
+  termLabel         String?  @db.VarChar(80)
+  timezone          String   @default("America/Bahia") @db.VarChar(80)
+  validFrom         String?  @db.VarChar(30)
+  validUntil        String?  @db.VarChar(30)
+  weeklyHoursTarget Int?
+  notes             String?  @db.Text
+  updatedAt         DateTime @updatedAt
+
+  profile       CandidateProfile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  classBlocks   ScheduleBlock[]
+  workWindows   WorkWindow[]
+}
+
+model ScheduleBlock {
+  id              String     @id @default(cuid())
+  availabilityId  String
+  label           String     @db.VarChar(140)
+  blockType       String     @default("CLASS") @db.VarChar(40)
+  dayOfWeek       Int
+  startTime       String     @db.VarChar(5)
+  endTime         String     @db.VarChar(5)
+  factStatus      FactStatus @default(NEEDS_REVIEW)
+  sourceReference String?    @db.VarChar(2048)
+
+  availability AvailabilityTerm @relation(fields: [availabilityId], references: [id], onDelete: Cascade)
+
+  @@index([availabilityId, dayOfWeek])
+}
+
+model WorkWindow {
+  id               String     @id @default(cuid())
+  availabilityId   String
+  label            String?    @db.VarChar(140)
+  dayOfWeek        Int
+  startTime        String     @db.VarChar(5)
+  endTime          String     @db.VarChar(5)
+  availabilityType String     @default("FIXED") @db.VarChar(40)
+  factStatus       FactStatus @default(NEEDS_REVIEW)
+  sourceReference  String?    @db.VarChar(2048)
+
+  availability AvailabilityTerm @relation(fields: [availabilityId], references: [id], onDelete: Cascade)
+
+  @@index([availabilityId, dayOfWeek])
+}
+
 model AuditEvent {
   id        String   @id @default(cuid())
   eventType String   @db.VarChar(100)

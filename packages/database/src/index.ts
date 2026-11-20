@@ -1,6 +1,8 @@
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from './generated/prisma/client.js';
 
+export { Prisma } from './generated/prisma/client.js';
+
 export function createDatabaseClient(
   connectionString = process.env.DATABASE_URL,
 ): PrismaClient {

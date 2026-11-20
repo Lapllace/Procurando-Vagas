@@ -3,17 +3,17 @@ import { createDatabaseClient } from '@vagamatch/database';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
-  private readonly client = createDatabaseClient();
+  readonly prisma = createDatabaseClient();
 
   async onModuleInit(): Promise<void> {
-    await this.client.$connect();
+    await this.prisma.$connect();
   }
 
   async onModuleDestroy(): Promise<void> {
-    await this.client.$disconnect();
+    await this.prisma.$disconnect();
   }
 
   async check(): Promise<void> {
-    await this.client.$queryRaw`SELECT 1`;
+    await this.prisma.$queryRaw`SELECT 1`;
   }
 }

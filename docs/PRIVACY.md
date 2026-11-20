@@ -6,13 +6,14 @@ Currículo, documentos acadêmicos, dados de contato, perfil real, histórico de
 
 ## Regras de armazenamento
 
-- Desenvolvimento local-first, com serviços vinculados a loopback por padrão.
+- Desenvolvimento local-first, com serviços vinculados a loopback (127.0.0.1) por padrão.
 - Segredos em variáveis de ambiente ou secret manager.
 - OAuth com escopo mínimo e leitura apenas para integração inicial de e-mail.
 - Não enviar PII a modelos de IA sem necessidade e consentimento.
 - Logs sem texto de currículo, token, e-mail, telefone ou conteúdo integral de formulário.
 - Eventos de auditoria guardam tipo e resultado da ação, sem texto livre com dados pessoais.
 - Backups locais protegidos pelo usuário.
+- O perfil atual usa um identificador local único e ainda não oferece autenticação multiusuário.
 
 ## Automação de plataformas
 
