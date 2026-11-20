@@ -7,12 +7,12 @@ export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   @Get()
-  getProfile() {
+  getProfile(): Promise<unknown> {
     return this.profileService.getProfile();
   }
 
   @Patch()
-  updateProfile(@Body() payload: ProfileUpsertDto) {
+  updateProfile(@Body() payload: ProfileUpsertDto): Promise<unknown> {
     return this.profileService.updateProfile(payload);
   }
 }

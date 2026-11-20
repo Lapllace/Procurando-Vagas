@@ -83,7 +83,7 @@ function validateTimeRanges(payload: ProfileUpsertDto): void {
 export class ProfileService {
   constructor(private readonly database: DatabaseService) {}
 
-  async getProfile() {
+  async getProfile(): Promise<unknown> {
     await this.ensureProfile();
     return this.database.prisma.candidateProfile.findUniqueOrThrow({
       where: { id: PROFILE_ID },
@@ -91,7 +91,7 @@ export class ProfileService {
     });
   }
 
-  async updateProfile(payload: ProfileUpsertDto) {
+  async updateProfile(payload: ProfileUpsertDto): Promise<unknown> {
     validateTimeRanges(payload);
 
     const {
