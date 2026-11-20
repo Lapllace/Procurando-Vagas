@@ -22,7 +22,6 @@ Cada fato admite factStatus: CANDIDATE_PROVIDED, NEEDS_REVIEW ou CONFIRMED. Quan
 
 - DTOs aninhados são validados com class-validator e class-transformer.
 - Campos desconhecidos são rejeitados pela ValidationPipe.
-- Limite do corpo JSON: 256 KB.
 - Horários devem estar no formato HH:mm e fim precisa ser posterior ao início.
 - Aulas não podem se sobrepor no mesmo dia.
 - Janelas de trabalho não podem se sobrepor nem conflitar com aulas.

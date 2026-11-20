@@ -6,7 +6,6 @@ import { AppModule } from './app.module.js';
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
-  app.useBodyParser('json', { limit: '256kb' });
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
