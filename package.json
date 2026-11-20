@@ -18,8 +18,8 @@
     "build": "npm run build:api && npm run build:web",
     "lint": "eslint . --max-warnings=0",
     "format:check": "prettier --check .",
-    "typecheck": "npm run typecheck --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present"
+    "typecheck": "npm run db:generate && npm run build:database && npm run typecheck --workspaces --if-present",
+    "test": "npm run db:generate && npm run build:database && npm run test --workspaces --if-present"
   },
   "devDependencies": {
     "@eslint/js": "9.39.1",

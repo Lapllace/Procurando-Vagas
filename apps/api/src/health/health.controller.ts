@@ -3,7 +3,7 @@ import {
   Get,
   ServiceUnavailableException,
 } from '@nestjs/common';
-import { DatabaseService } from '../database/database.service';
+import { DatabaseService } from '../database/database.service.js';
 
 @Controller('health')
 export class HealthController {

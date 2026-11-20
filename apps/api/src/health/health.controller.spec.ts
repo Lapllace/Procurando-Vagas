@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { DatabaseService } from '../database/database.service';
-import { HealthController } from './health.controller';
+import { DatabaseService } from '../database/database.service.js';
+import { HealthController } from './health.controller.js';
 
 describe('HealthController', () => {
   it('returns the process health status', () => {
