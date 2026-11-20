@@ -1,0 +1,25 @@
+{
+  "weights": {
+    "technicalFit": 35,
+    "scheduleFit": 30,
+    "seniorityFit": 15,
+    "workModeAndLocation": 10,
+    "educationAndOtherRequirements": 10
+  },
+  "bands": {
+    "high": { "min": 80, "max": 100 },
+    "medium": { "min": 65, "max": 79 },
+    "low": { "min": 0, "max": 64 }
+  },
+  "hardRules": [
+    "Reject postings in candidate-excluded areas.",
+    "Flag fixed schedules that overlap confirmed unavailable blocks.",
+    "Unknown schedules are not considered flexible.",
+    "Flag required completed degrees when candidate education is in progress.",
+    "Do not infer years of experience from a general freelance period.",
+    "Do not present expired or unverifiable postings as active."
+  ],
+  "unknownValues": "Keep unknown values visible; do not turn them into positive evidence.",
+  "scoringEngine": "deterministic_backend",
+  "aiRole": "extract_requirements_and_map_evidence_only"
+}

@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "timezone": "America/Bahia",
+  "term": "",
+  "validFrom": "",
+  "validUntil": "",
+  "classBlocks": [],
+  "workAvailability": {
+    "weeklyHoursTarget": null,
+    "windows": [],
+    "commuteBufferMinutes": null,
+    "notes": "Não inferir disponibilidade a partir dos horários sem aula."
+  }
+}
